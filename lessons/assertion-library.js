@@ -45,3 +45,7 @@ expect(result).toBeGreaterThan(11); // fails
 /* toBeGreaterThan() assertion test */
 result = sum(4, 7);
 expect(result).toBeGreaterAndEqualThan(11); //passes
+
+module.exports = {
+  expect,
+};
