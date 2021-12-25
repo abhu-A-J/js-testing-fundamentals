@@ -11,12 +11,22 @@
  * Execute: Use `node lessons/simple.js` to run the test.
  */
 
-const {sum, subtract} = require('../math')
+const { sum, subtract } = require('../math');
 
-let result, expected
+let result, expected;
 
-/**
- * Hint: there's no magic, just the most straightforward conditional statement.
- *
- * Answer: Checkout the main branch for the answer.
- */
+/* Write test function for the sum module */
+result = sum(1, 2);
+expected = 3;
+
+if (result !== expected) {
+  throw new Error(`${result} does not equal ${expected}`);
+}
+
+/* Write test function for substraction module */
+result = subtract(2, 1);
+expected = 1;
+
+if (result !== expected) {
+  throw new Error(`${result} does not equal ${expected}`);
+}
