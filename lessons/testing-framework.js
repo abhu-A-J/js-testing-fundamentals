@@ -1,9 +1,9 @@
 const { sum, subtract, correctSum } = require('../math');
 const { expect } = require('./assertion-library');
 
-function test(title, cb) {
+async function test(title, cb) {
   try {
-    cb();
+    await cb();
     console.log(`✅ ${title}`);
   } catch (err) {
     console.error(`❌ ${title}`);
