@@ -1,33 +1,47 @@
-/**
- *  We have tested `sum` and `subtract` in simple.js,
- *  but this code is pretty imperative.
- *  It'd be nice to write a little abstraction to make
- *  it read a little nicer. Let's write a simple
- *  abstraction to encapsulate this assertion.
- *
- * Task:
- *  1. Create a function called `expect` going to accept an `actual`.
- *  2. Return an object that has some assertions on it. The first one
- *     here is going to be `toBe`, and that's going to take an expected
- *     value.
- *               **BONUS**
- *  Can you add more assertions like `toEqual`, `toBeGreaterThan`, and
- *  `toBeLessThan`?
- *
- * Execute: Use `node lessons/assertion-library.js` to run the test.
- */
-const {sum, subtract} = require('../math')
+const { sum, subtract, correctSum } = require('../math');
 
-let result, expected
+/* Assertion abstraction */
+function expect(result) {
+  return {
+    toBe(expected) {
+      if (result !== expected) {
+        throw new Error(`${result} is not equal to ${expected}`);
+      }
+    },
+    toBeGreaterThan(expected) {
+      if (result <= expected) {
+        throw new Error(`${result} is not greater than ${expected}`);
+      }
+    },
+    toBeGreaterAndEqualThan(expected) {
+      if (result < expected) {
+        throw new Error(`${result} is not greater than ${expected}`);
+      }
+    },
+  };
+}
 
-result = sum(3, 7)
-expected = 10
-expect(result).toBe(expected)
+let result, expected;
 
-result = subtract(7, 3)
-expected = 4
-expect(result).toBe(expected)
+/* toBe() assertion test */
+result = sum(3, 7);
+expected = 10;
+expect(result).toBe(expected); // fails
 
-/**
- * Answer: Checkout the main branch for the answer.
- */
+/* toBe() assertion test */
+result = correctSum(3, 7);
+expected = 10;
+expect(result).toBe(expected); // passes
+
+/* toBe() assertion test */
+result = subtract(7, 3);
+expected = 4;
+expect(result).toBe(expected); // passes
+
+/* toBeGreaterThan() assertion test */
+result = sum(4, 7);
+expect(result).toBeGreaterThan(11); // fails
+
+/* toBeGreaterThan() assertion test */
+result = sum(4, 7);
+expect(result).toBeGreaterAndEqualThan(11); //passes
